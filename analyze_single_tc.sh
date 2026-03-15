@@ -77,4 +77,48 @@ EOF
 )
 
 echo "=== Claude Analysis ==="
-echo "$PROMPT" | claude --print
+ANALYSIS=$(echo "$PROMPT" | claude --print)
+echo "$ANALYSIS"
+
+# 5. Save markdown report
+REPORTS_DIR="./reports"
+mkdir -p "$REPORTS_DIR"
+REPORT_FILE="$REPORTS_DIR/${TC_NAME}.md"
+
+cat > "$REPORT_FILE" <<MDEOF
+# Failure Report: $TC_NAME
+
+**Test file:** \`$SQL_FILE\`
+**Generated:** $(date -u +"%Y-%m-%d %Human:%M:%S UTC")
+
+## SQL
+
+\`\`\`sql
+$SQL_CONTENT
+\`\`\`
+
+## Expected Output
+
+\`\`\`
+$EXPECTED_OUTPUT
+\`\`\`
+
+## Actual Output
+
+\`\`\`
+$ACTUAL_OUTPUT
+\`\`\`
+
+## Diff
+
+\`\`\`diff
+$DIFF_OUTPUT
+\`\`\`
+
+## Analysis
+
+$ANALYSIS
+MDEOF
+
+echo
+echo "Report saved: $REPORT_FILE"

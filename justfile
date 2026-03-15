@@ -41,3 +41,7 @@ run-ctp-sql:
 # Select a failed TC with fzf, run it with csql, and analyze with claude
 analyze-single-tc dest=dest:
   bash analyze_single_tc.sh {{dest}}
+
+# Interactively browse and open failure reports in $EDITOR
+browse-reports reports="./reports":
+  bash browse_reports.sh {{reports}}
