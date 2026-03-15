@@ -2,7 +2,7 @@
 # Usage: just <recipe> [args]
 
 pr    := "https://github.com/CUBRID/cubrid/pull/6904"
-src   := ""
+src   := "/home/vimkim/gh/tc/cubrid-testcases/"
 dest  := "./failed_tcs"
 list  := "failed_tc_list.txt"
 
