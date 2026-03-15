@@ -19,7 +19,10 @@ just fetch pr=https://github.com/CUBRID/cubrid/pull/6904
 just clone src=/path/to/cubrid-testcases
 
 # Or run both steps at once
-just run pr=https://github.com/CUBRID/cubrid/pull/6904 src=/path/to/cubrid-testcases
+just run-fetch-clone pr=https://github.com/CUBRID/cubrid/pull/6904 src=/path/to/cubrid-testcases
+
+# 3. Select a failed TC with fzf and analyze it with Claude
+just analyze-single-tc
 ```
 
 ## Tools
@@ -65,16 +68,18 @@ uv run clone_failed_tc.py -l failed_tc_list.txt -s <source_dir> -d <dest_dir>
 |--------|-------------|
 | `just fetch [pr=<url>]` | Fetch failed TC list → `failed_tc_list.txt` |
 | `just clone [src=<dir>]` | Copy TCs from source dir → `./failed_tcs` |
-| `just run [pr=<url>] [src=<dir>]` | Full pipeline (fetch + clone) |
+| `just run-fetch-clone [pr=<url>] [src=<dir>]` | Full pipeline (fetch + clone) |
 | `just clean` | Remove `failed_tc_list.txt` and `./failed_tcs` |
+| `just analyze-single-tc [dest=<dir>]` | Select a TC with fzf and analyze with Claude |
+| `just run-ctp-sql` | Run CTP SQL suite with `example-sql.conf` |
 
 Default variable values can be overridden on the command line:
 
 ```sh
-just run pr=https://github.com/CUBRID/cubrid/pull/6904 \
-         src=/path/to/cubrid-testcases \
-         dest=./my_output \
-         list=my_list.txt
+just run-fetch-clone pr=https://github.com/CUBRID/cubrid/pull/6904 \
+                     src=/path/to/cubrid-testcases \
+                     dest=./my_output \
+                     list=my_list.txt
 ```
 
 ## Environment Variables
