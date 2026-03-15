@@ -37,3 +37,7 @@ clean:
 
 run-ctp-sql:
   ctp.sh sql -c ./example-sql.conf
+
+# Select a failed TC with fzf, run it with csql, and analyze with claude
+analyze-single-tc dest=dest:
+  bash analyze_single_tc.sh {{dest}}
