@@ -7,6 +7,7 @@ wheels/
 *.egg-info
 
 failed_tcs/
+failed_tc_list.txt
 
 # Virtual environments
 .venv
