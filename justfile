@@ -42,6 +42,13 @@ run-ctp-sql:
 analyze-single-tc dest=dest:
   bash analyze_single_tc.sh {{dest}}
 
+# Pick a TC with fzf (run in a separate terminal/zellij pane, then trigger /analyze-tc in Claude Code)
+pick:
+  bash pick-tc.sh {{dest}}
+
 # Interactively browse and open failure reports in $EDITOR
 browse-reports reports="./reports":
   bash browse_reports.sh {{reports}}
+
+serve:
+  markserv -v -a 0.0.0.0 -p 8001 --browser=false ./reports/
