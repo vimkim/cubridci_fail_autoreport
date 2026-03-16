@@ -2,6 +2,8 @@
 
 Toolchain for extracting and collecting failed `test_sql` test cases from a CUBRID CircleCI run, given a GitHub PR URL.
 
+![Demo](./demo.gif)
+
 ## Requirements
 
 - [uv](https://docs.astral.sh/uv/)
