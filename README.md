@@ -12,17 +12,28 @@ Toolchain for extracting and collecting failed `test_sql` test cases from a CUBR
 ## Quick Start
 
 ```sh
+# Set env vars once (or put them in .env / .envrc)
+export PR_URL=https://github.com/CUBRID/cubrid/pull/6904
+export TC_SRC_DIR=/path/to/cubrid-testcases
+
 # 1. Fetch failed TC list from a PR
-just fetch pr=https://github.com/CUBRID/cubrid/pull/6904
+just fetch
 
 # 2. Clone the failed TCs from your local cubrid-testcases checkout
-just clone src=/path/to/cubrid-testcases
+just clone
 
 # Or run both steps at once
-just run-fetch-clone pr=https://github.com/CUBRID/cubrid/pull/6904 src=/path/to/cubrid-testcases
+just run-fetch-clone
 
 # 3. Select a failed TC with fzf and analyze it with Claude
 just analyze-single-tc
+```
+
+You can still pass values directly on the command line (overrides env vars):
+
+```sh
+just fetch pr=https://github.com/CUBRID/cubrid/pull/1234
+just clone src=/other/path/cubrid-testcases
 ```
 
 ## Tools
@@ -88,3 +99,19 @@ just run-fetch-clone pr=https://github.com/CUBRID/cubrid/pull/6904 \
 |----------|-------------|
 | `GITHUB_TOKEN` | GitHub personal access token |
 | `CIRCLECI_TOKEN` | CircleCI personal API token |
+| `PR_URL` | Default value for `pr` in justfile recipes |
+| `TC_SRC_DIR` | Default value for `src` in justfile recipes |
+
+The justfile reads `PR_URL` and `TC_SRC_DIR` as defaults for the `pr` and `src` variables, so you can set them once instead of passing them on every invocation:
+
+```sh
+export PR_URL=https://github.com/CUBRID/cubrid/pull/6904
+export TC_SRC_DIR=/path/to/cubrid-testcases
+
+just fetch
+just clone
+# or
+just run-fetch-clone
+```
+
+Command-line arguments still take precedence over environment variables.

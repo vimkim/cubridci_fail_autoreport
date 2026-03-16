@@ -1,8 +1,8 @@
 # test-sql-autoreport justfile
 # Usage: just <recipe> [args]
 
-pr    := "https://github.com/CUBRID/cubrid/pull/6904"
-src   := "/home/vimkim/gh/tc/cubrid-testcases/"
+pr    := env_var_or_default("PR_URL", "")
+src   := env_var_or_default("TC_SRC_DIR", "")
 dest  := "./failed_tcs"
 list  := "failed_tc_list.txt"
 
@@ -27,8 +27,8 @@ clone:
 run-fetch-clone:
     @test -n "{{pr}}"  || (echo "Error: pr= is required"  && exit 1)
     @test -n "{{src}}" || (echo "Error: src= is required" && exit 1)
-    just fetch pr={{pr}} list={{list}}
-    just clone src={{src}} dest={{dest}} list={{list}}
+    uv run get_failed_tc_list_from_pr.py {{pr}} | tee {{list}}
+    uv run clone_failed_tc.py -l {{list}} -s {{src}} -d {{dest}}
 
 # Remove generated output files
 clean:
