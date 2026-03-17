@@ -1,4 +1,4 @@
-# Agent Guide — test-sql-autoreport
+# Agent Guide — cubrid-test-ai-report
 
 This project automates extraction and analysis of failed `test_sql` test cases from CUBRID CircleCI runs.
 

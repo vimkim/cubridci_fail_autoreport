@@ -1,4 +1,4 @@
-# test-sql-autoreport justfile
+# cubrid-test-ai-report justfile
 # Usage: just <recipe> [args]
 
 pr    := env_var_or_default("PR_URL", "")

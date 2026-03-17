@@ -1,6 +1,6 @@
-# test-sql-autoreport
+# cubrid-test-ai-report
 
-Toolchain for extracting and collecting failed `test_sql` test cases from a CUBRID CircleCI run, given a GitHub PR URL.
+Fetch failed `test_sql` test cases from CUBRID CircleCI, run them locally, and generate AI-powered failure reports.
 
 ![Demo](./demo.gif)
 
